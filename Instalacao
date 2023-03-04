@@ -1,0 +1,51 @@
+# PASSO A PASSO PARA INICIALIZAÇÃO
+
+# PASSO 1º
+  * instale o mongoDB;
+  * instale o Postgree;
+  
+# PASSO 2º
+  * com o postgree configurado abra um prompt windows e inicie com o cmd "psql -U (nome do usuário do postgree) sem os parênteses";
+  * digite sua senha criada;
+  * crie o banco de dados com o nome knowledge com o cmd "CREATE DATABASE knowledge;"
+  * conecte com ele usando "\c";
+  
+# PASSO 3º 
+  * entre na pasta backend e renomei o arquivo chamado env_file para .env;
+  * acesse ele e adicione as informações para a conexão do banco de dados do postgree;
+      module.exports = {
+      authSecret: 'CRIE UMA CHAVE ALEATORIA POR SEGURANÇA',
+      db: {
+        host : '127.0.0.1', COLOQUE SEU IP
+        port: 5432, NÃO MUDE A PORTA PADRÃO DO BANCO DE DADOS
+        database: '', NOME DO BANCO POSTGREE
+        user: '', USUÁRIO DO BANCO POSTGREE
+        password: '' SENHA DO BANCO POSTGREE
+       }
+    }
+    
+  * após a configuração verifique o arquivo knexfile.js na mesma pasta backend se está tudo certo;
+      const { db } = require('./.env')
+
+       module.exports = {
+	     client: 'postgresql',
+	     connection: db,
+	     pool: {
+		    min: 2,
+		    max: 10
+	     },
+	     migrations: {
+		    tableName: 'knex_migrations'
+	     }
+    };
+    
+  * no terminal do backend digite o cmd "knex migrate:latest" para ele criar as tabelas do banco de dados;
+  * execute o comando "npm start";
+
+# PASSO 4º
+  * entre na pasta frontend do projeto;
+  * execute o comando "npm i";
+  * depois execute o comando "npm run serve"; 
+
+      
+
